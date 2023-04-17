@@ -65,22 +65,25 @@ $filtered_cities_count = count($filtered_cities);
 // unset($num_value [7]);
 // var_dump($num_value);
 
-$array = array(
-        array(1, 2, 3),
-        array(4, 5, 6),
-        array(7, 8, 9),
-        array(10, 11, 12),
-        array(13, 14, 15),
-        array(16, 17, 18),
-        array(19, 20, 21),
-        array(22, 23, 24),
-        array(25, 26, 27),
-        array(28, 29, 30)
-    );
-    for($i=5; $i<=7; $i++) {
-        unset($array[$i]);
-    }
-var_dump($array);    
+$numbers = array(
+    array(1, 2, 3),
+    array(4, 5, 6),
+    array(7, 8, 9),
+    array(10, 11, 12),
+    array(13, 14, 15),
+    array(16, 17, 18),
+    array(19, 20, 21),
+    array(22, 23, 24),
+    array(25, 26, 27),
+    array(28, 29, 30)
+);
+
+
+$array = array_splice($numbers, 5, 3);
+$numbers = array_values($numbers);
+
+
+var_dump($numbers); 
     
     // unset($array [5]);
     // unset($array [6]);
