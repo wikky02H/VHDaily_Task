@@ -6,7 +6,7 @@ $count = 0;
 while (true) {
     $count++;
     var_dump($count);
-    if ($count == 10) {
+    if ($count === 10) {
         break;
     }
 }
@@ -14,7 +14,7 @@ echo $count;
 
 //task-2
 for($i = 1; $i <= 20; $i++){
-    if($i % 2 == 0){
+    if($i % 2 === 0){
       continue;
     }
     echo "Count: ".$i. "\n";
