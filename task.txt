@@ -1,0 +1,44 @@
+task_2
+
+OOp(Object-Oriented Programming):
+          ->Object-Oriented Programming (OOP) is a programming paradigm that focuses on creating reusable code through the use of classes and objects.
+OOP is based on four main principles,thase principles also commonly known as "four pillars" 
+
+=>four pillers (or) four main principles:
+
+1.Encapsulation:
+
+          ->Encapsulation is the concept of hiding the internal details of an object from the outside world, 
+            and providing a public interface through which the object can be accessed and manipulated.
+            This is achieved through the use of access modifiers such as 
+                    public, 
+                    private, 
+                    and protected.
+2.Inheritance:
+            
+          ->Inheritance is the process of creating new classes based on existing classes, 
+            where the new class inherits the properties and methods of the existing class. 
+            This allows for code reuse and the creation of more specialized classes.
+3.Polymorphism:
+
+          ->Polymorphism is the ability of objects of different types to be treated as if they were of the same type. 
+            This is achieved through the use of interfaces and abstract classes, 
+            which define a common set of methods that can be implemented by different classes.
+
+4.Abstraction:
+   
+          ->Abstraction is the process of simplifying complex systems by breaking them down into smaller,more manageable parts. 
+            In OOP, abstraction is achieved through the use of abstract classes and interfaces,
+            which define a common set of methods that can be implemented by different classes, 
+            without specifying the exact implementation details.
+
+task_4
+access modifiers:
+          ->access modifiers are keyword that define the level of access to props(properties) and methods in a class.
+          ->there are three access modifiers(public,private,protected)
+            1.public 
+                 ->A public props(property) or methods can be accessed from both inside and outside of the class.
+            2.private
+                 ->A private props(property) or method can only be accessed from inside the class itself. It cannot be accessed from outside of the class or any child classes.
+            3.protected
+                 ->A protected property or method can only be accessed from inside the class itself and any child classes that inherit(get) from it       
