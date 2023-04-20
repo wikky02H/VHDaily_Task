@@ -10,7 +10,7 @@ use Exception;
 class UserController extends Controller
 {
 
-    public function LoginUser(Request $request)
+    public function loginUser(Request $request)
     {
         $validation = Validator::make($request->all(), [
             "email" => "required|email|min:10",
