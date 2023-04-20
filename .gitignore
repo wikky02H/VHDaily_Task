@@ -50,4 +50,4 @@ Homestead.json
 /.vagrant
 .phpunit.result.cache
 
-
+/.task

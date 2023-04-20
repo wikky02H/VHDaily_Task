@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,9 +18,16 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('/learning-session', function () {
-    return response()->json([
-        'message' => 'Welcome to learning session'
-    ], 200);
-});
-// task 3&4 are located under task_6_Q&A folder task_6.txt file
+Route::post("user",[UserController::class,"LoginUser"]);
+Route::get("user/{email}",[UserController::class,"getUser"]);
+Route::put("user",[UserController::class,"updateUser"]);
+Route::delete("user",[UserController::class,"deleteUser"]);
+
+
+
+
+
+
+
+
+
