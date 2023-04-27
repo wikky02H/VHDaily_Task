@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -18,12 +19,16 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::post("user",[UserController::class,"loginUser"]);
-Route::get("user/{email}",[UserController::class,"getUser"]);
-Route::put("user",[UserController::class,"updateUser"]);
-Route::delete("user",[UserController::class,"deleteUser"]);
+// Route::post("user",[UserController::class,"loginUser"]);
+// Route::get("user/{email}",[UserController::class,"getUser"]);
+// Route::put("user",[UserController::class,"updateUser"]);
+// Route::delete("user",[UserController::class,"deleteUser"]);
 
-
+Route::post("category",[CategoryController::class,"insert"]);
+Route::post("category/bulkInsert",[CategoryController::class,"bulkInsert"]);
+Route::get("category",[CategoryController::class,"get"]);
+Route::put("category",[CategoryController::class,"update"]);
+Route::delete("category",[CategoryController::class,"delete"]);
 
 
 
