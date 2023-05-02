@@ -1,0 +1,23 @@
+//task-1
+
+1.	What are INNER JOIN, LEFT JOIN, RIGHT JOIN, FULL OUTER JOIN, CROSS JOIN and SELF JOIN?
+
+INNER JOIN:
+  ->Returns only the rows that have matching values in both tables being joined.
+
+LEFT JOIN:
+  -> Returns all the rows from the left table and matching rows from the right table. 
+     If there is no matching row in the right table, then it returns NULL values for the right table columns.
+
+RIGHT JOIN:
+ -> Returns all the rows from the right table and matching rows from the left table. 
+    If there is no matching row in the left table, then it returns NULL values for the left table columns.
+
+FULL OUTER JOIN:
+ ->Returns all the rows from both tables and NULL values for the columns that do not have a matching row in the other table.
+
+CROSS JOIN
+ -> Returns the Cartesian(CROSS) product of both tables, meaning all possible combinations of rows from both tables.
+
+SELF JOIN
+ -> A self join is a regular join, but the table is joined with itself.

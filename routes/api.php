@@ -32,6 +32,7 @@ Route::put("category",[CategoryController::class,"update"]);
 Route::delete("category",[CategoryController::class,"delete"]);
 
 Route::post("products",[ProductController::class,"insert"]);
+Route::get("products",[ProductController::class,"getProducts"]);
 
 
 

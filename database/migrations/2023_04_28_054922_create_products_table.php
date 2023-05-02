@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             //if nullable needs than implement it.
             $table->foreignId('category_id')/*->nullable()*/->constrained("categories");
             $table->string("name",100);
             $table->boolean('is_active');
+            $table->timestamps();
         });
     }
 

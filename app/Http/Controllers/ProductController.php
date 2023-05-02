@@ -51,4 +51,42 @@ class ProductController extends Controller
             ], 404);
         }
     }
+
+    public function getProducts()
+{
+    try {
+      
+    $products = product::join('categories', 'products.category_id', '=', 'categories.id')
+    ->select('products.*','categories.name as category_name')
+    ->get();
+        if ($products) {
+            Log::info("user", [$products]);
+            return response()->json([
+                'message' => ' success',
+                'result' => $products,
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'get list of product error',
+            ], 404);
+        }
+    } catch (Exception $e) {
+        Log::error('error', [$e]);
+        return response()->json([
+            "message" => "Internal server error",
+        ], 500);
+    }
+
+
+
+
+
+
+    // $products = product::join('categories', 'products.category_id', '=', 'categories.id')
+    //             ->select('products.*', 'categories.name as category_name')
+    //             ->get();
+
+    // return response()->json($products);
+}
+
 }
