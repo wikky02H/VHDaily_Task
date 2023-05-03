@@ -33,3 +33,30 @@ return new class extends Migration
 }
 
 };
+
+// return new class extends Migration
+// {
+//     /**
+//      * Run the migrations.
+//      */
+//     public function up(): void
+//     {
+//         Schema::create('products', function (Blueprint $table) {
+//             $table->id();
+//             //if nullable needs than implement it.
+//             $table->foreignId('category_id')/*->nullable()*/->constrained("categories");
+//             $table->string("name",100);
+//             $table->boolean('is_active');
+//             $table->timestamps();
+//         });
+//     }
+
+//     /**
+//      * Reverse the migrations.
+//      */
+//     public function down(): void
+//     {
+//         Schema::dropIfExists('products');
+//     }
+// };
+

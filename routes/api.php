@@ -35,5 +35,7 @@ Route::post("products",[ProductController::class,"insert"]);
 Route::get("products",[ProductController::class,"getProducts"]);
 
 Route::get("productsAlter",[ProductController::class,"get_Products"]);
+// Route::get("productsFormal",[ProductController::class,"getproductformal"]);
+
 
 

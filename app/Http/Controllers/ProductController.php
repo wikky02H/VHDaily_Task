@@ -98,10 +98,10 @@ class ProductController extends Controller
         try {
             if ($active === 'active') {
                 $query = Product::with('category')->where('is_active', '=', true)
-                ->orderByDesc('name');
+                    ->orderByDesc('name');
             } elseif ($active === 'is_active') {
                 $query = Product::with('category')->where('is_active', '=', false)
-                ->orderByDesc('name');
+                    ->orderByDesc('name');
             } else {
                 $query = Product::with('category')->orderByDesc('name');
             }
@@ -128,4 +128,45 @@ class ProductController extends Controller
             ], 500);
         }
     }
+
+
+
+    // public function getproductformal(Request $request)
+    // {
+    //     try {
+    //         $filter = $request->query("filter");
+    //         $Search = $request->query("search");
+    //         $query = Product::join("categories", "categories.id", "=", "products.category_id")
+    //             ->select(
+    //                 "products.name as product_name",
+    //                 "categories.name as category_name",
+    //             );
+    //         if ($filter) {
+    //             $flag = ($filter === "activeOnly") ? 1 : 0;
+    //             $query = $query->where("products.is_active", $flag);
+    //         }
+    //         if ($Search) {
+    //             $query = $query->whereraw("
+    //                                         products.name LIKE '%$request->Search%'
+    //                                         OR categories.name LIKE '%$request->Search%'
+    //                                      ");
+    //         }
+    //         $products = $query->orderBy("products.name", "ASC")
+    //             ->paginate();
+    //         $pagination_options = [
+    //             "current_page" => $products->currentPage(),
+    //             "total_records" => count($products->items()),
+    //         ];
+    //         return response()->json([
+    //             "message" => "Success",
+    //             "result" => $products->items(),
+    //             "pagination_options" => $pagination_options
+    //         ], 200);
+    //     } catch (Exception $c) {
+    //         Log::error($c);
+    //         return response()->json([
+    //             "message" => "internal server error",
+    //         ], 500);
+    //     }
+    // }
 }
