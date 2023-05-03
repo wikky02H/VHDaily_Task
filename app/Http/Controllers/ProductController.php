@@ -63,7 +63,7 @@ class ProductController extends Controller
                 ->orderByDesc('name');
             // ->get();
             // search by active status
-            $active = $request->input('is_active', true);
+            $active = $request->input('is_active');
             $query->active($active);
 
             // Search by product name
@@ -73,6 +73,42 @@ class ProductController extends Controller
             }
 
 
+            $products = $query->paginate(10);
+            if ($products) {
+                Log::info("user", [$products]);
+                return response()->json([
+                    'message' => ' success',
+                    'result' => $products,
+                ], 200);
+            } else {
+                return response()->json([
+                    'message' => 'get list of product error',
+                ], 404);
+            }
+        } catch (Exception $e) {
+            Log::error('error', [$e]);
+            return response()->json([
+                "message" => "Internal server error",
+            ], 500);
+        }
+    }
+    public function get_Products(Request $request)
+    {
+        $active = $request->query('status');
+        try {
+            if ($active === 'active') {
+                $query = Product::with('category')->where('is_active', '=', true)
+                ->orderByDesc('name');
+            } elseif ($active === 'is_active') {
+                $query = Product::with('category')->where('is_active', '=', false)
+                ->orderByDesc('name');
+            } else {
+                $query = Product::with('category')->orderByDesc('name');
+            }
+            $search = $request->input('search');
+            if ($search) {
+                $query->where('name', 'like', '%' . $search . '%');
+            }
             $products = $query->paginate(10);
             if ($products) {
                 Log::info("user", [$products]);
