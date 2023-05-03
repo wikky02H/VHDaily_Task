@@ -1,0 +1,22 @@
+task-3;
+question:   what are aggregate functions?
+
+ans:
+
+Aggregate functions are functions in a database management system that perform a calculation on a set of values and return a single value as the result.
+These functions are used to summarize or aggregate data in a database table.
+
+There are several common aggregate functions that are used in database management systems, including:
+
+    COUNT() - returns the number of rows in a table, or the number of rows that meet a specified condition.
+
+    SUM() - returns the sum of a column.
+
+    AVG() - returns the average value of a column.
+
+    MAX() - returns the maximum value of a column.
+
+    MIN() - returns the minimum value of a column.
+
+In summary, aggregate functions allow you to perform calculations on a set of values and return a single value as the result,
+making it easier to analyze and summarize large sets of data.

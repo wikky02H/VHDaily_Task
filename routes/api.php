@@ -35,4 +35,3 @@ Route::post("products",[ProductController::class,"insert"]);
 Route::get("products",[ProductController::class,"getProducts"]);
 
 
-
