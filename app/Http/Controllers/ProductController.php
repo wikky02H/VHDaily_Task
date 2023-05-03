@@ -169,4 +169,64 @@ class ProductController extends Controller
     //         ], 500);
     //     }
     // }
+     public function getproductformal(Request $request){
+        $validation = Validator::make(
+            $request->all(),
+            [
+                "pageLimit" => "required|numeric",
+                "currentPage" => "required|numeric",
+            ]
+        );
+
+        if ($validation->fails()) {
+            return response()->json(
+                [
+                    "message" => "Validation error",
+                    "error" => $validation->errors()
+                ],
+                400
+            );
+        }
+        try{
+            $page_limit = $request->pageLimit;
+            $current_page = $request->currentPage;
+            $filter = $request->query("filter");
+            $search = $request->query("search");
+            $query = Product::join("categories","products.category_id","=","categories.id")
+            ->select("products.name as product_name","categories.name");
+
+            if($filter){
+                $flag =($filter === "active_only") ? 1 : 0;
+                $query = $query->where("products.is_active","=",$flag);
+            }
+            if($search){
+                $query -> whereraw(
+                    "products.name LIKE '%$request->search%'
+                    OR categories.name LIKE '%$request->search%'
+                    "
+                );
+            }
+            $products = $query->orderBy("products.name","ASC")
+                ->paginate(
+                    $perPage = $page_limit,
+                    $pageName = "page",
+                    $page = $current_page
+                );
+                $pagination_option = [
+                    "current_page" => $products->currentPage(),
+                    "total_page" => $products->total(),
+                ];
+                return response()->json([
+                    "message" => "Success",
+                    "result" => $products->items(),
+                    "pagination_options" => $pagination_option
+                ], 200);
+
+        }catch(Exception $e){
+            Log::error("error",[$e]);
+            return response()->json([
+                "message" => "Internal server error",
+            ],500);
+        }
+     }
 }
