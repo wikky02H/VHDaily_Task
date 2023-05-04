@@ -216,6 +216,7 @@ class ProductController extends Controller
                     "current_page" => $products->currentPage(),
                     "total_page" => $products->total(),
                 ];
+                log::info("error",[$products->items()]);
                 return response()->json([
                     "message" => "Success",
                     "result" => $products->items(),
