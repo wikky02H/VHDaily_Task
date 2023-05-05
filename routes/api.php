@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\FileuploadController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\ApiEndPoint;
@@ -43,9 +44,10 @@ Route::get("products",[ProductController::class,"getProducts"]);
 Route::get("productsAlter",[ProductController::class,"get_Products"]);
 Route::get("productsFormal",[ProductController::class,"getproductformal"]);
 
+Route::post("uploadFile",[FileuploadController::class,"upload"]);
+Route::delete("deleteFile/{filename}",[FileuploadController::class,"delete"]);
 });
 
 
-/*Or
-Route::get("productsFormal",[ProductController::class,"getproductformal"])->middleware("api.endpoint");
+
 
