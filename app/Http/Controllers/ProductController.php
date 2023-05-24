@@ -8,13 +8,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
+
+
 class ProductController extends Controller
 {
     /* mysql query to insert record:
        ->INSERT INTO products (name, is_active, category_id) VALUES ('mango', 1, 140);
     */
+
     // task 1 & 2 are mention in task_10.txt
-    public function insert(Request $request)
+    public function insert(Request $request){
             $validation = Validator::make($request->all(), [
             'name' => 'required|string|max:100',
             'is_active' => 'required|Boolean',
@@ -28,7 +31,7 @@ class ProductController extends Controller
         }
 
         try {
-            $product_insert = Product::insert
+            $product_insert = Product::insert([
                 'name' => $request->name,
                 'is_active' => $request->is_active,
                 'category_id' => $request->category_id,
