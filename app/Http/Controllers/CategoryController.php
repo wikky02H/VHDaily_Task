@@ -3,25 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use Exception;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
-use Exception;
 
 class CategoryController extends Controller
 {
-//task-1
+    //task-1
     public function insert(Request $request)
     {
         $validation = Validator::make($request->all(), [
-            "name" => "required|string|min:5",
-            "is_active" => "required|boolean",
+            'name' => 'required|string|min:5',
+  +'is_active' => 'required|boolean',
         ]);
 
         if ($validation->fails()) {
             return response()->json([
-                "message" => "validation error",
-                "result" => $validation->errors()
+                'message' => 'validation error',
+                'result' => $validation->errors(),
             ], 400);
         }
         try {
@@ -30,7 +31,7 @@ class CategoryController extends Controller
                 'is_active' => $request->is_active,
             ]);
             if ($category) {
-                Log::info("user", [$category]);
+                Log::info('user', [$category]);
                 return response()->json([
                     'message' => 'category insert successfully',
                     'result' => $category,
@@ -43,7 +44,7 @@ class CategoryController extends Controller
         } catch (Exception $e) {
             Log::error('error', [$e]);
             return response()->json([
-                "message" => "Internal server error",
+                'message' => 'Internal server error',
             ], 500);
         }
     }

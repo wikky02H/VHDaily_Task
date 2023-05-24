@@ -34,18 +34,17 @@ use Illuminate\Support\Facades\Schema;
 
 // };
 
-return new class extends Migration
-{
+return new class () extends Migration {
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('products', function(Blueprint $table) {
             $table->id();
             //if nullable needs than implement it.
-            $table->foreignId('category_id')/*->nullable()*/->constrained("categories");
-            $table->string("name",100);
+            $table->foreignId('category_id')/*->nullable()*/ ->constrained('categories');
+            $table->string('name', 100);
             $table->boolean('is_active');
             $table->timestamps();
         });
@@ -59,4 +58,3 @@ return new class extends Migration
         Schema::dropIfExists('products');
     }
 };
-

@@ -10,44 +10,43 @@ use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
 {
-
     /* mysql query to insert record:
        ->INSERT INTO products (name, is_active, category_id) VALUES ('mango', 1, 140);
     */
     // task 1 & 2 are mention in task_10.txt
     public function insert(Request $request)
-    {
-        $validation = Validator::make($request->all(), [
-            "name" => "required|string|max:100",
-            "is_active" => "required|Boolean",
-            "category_id" => "required|int"
+            $validation = Validator::make($request->all(), [
+            'name' => 'required|string|max:100',
+            'is_active' => 'required|Boolean',
+            'category_id' => 'required|int',
         ]);
         if ($validation->fails()) {
             return response()->json([
-                "message" => "validation error",
-                "result" => $validation->errors()
+                'message' => 'validation error',
+                'result' => $validation->errors(),
             ], 400);
         }
 
         try {
-            $product_insert = Product::insert([
-                "name" => $request->name,
-                "is_active" => $request->is_active,
-                "category_id" => $request->category_id
+            $product_insert = Product::insert
+                'name' => $request->name,
+                'is_active' => $request->is_active,
+                'category_id' => $request->category_id,
             ]);
             if ($product_insert) {
                 return response()->json([
-                    "message" => "Success",
+                    'message' => 'Success',
                 ], 200);
             } else {
                 return response()->json([
-                    "message" => "product insert error",
+                    'message' => 'product insert error',
                 ], 400);
             }
         } catch (Exception $e) {
-            Log::error("product_insert_error", [$e]);
+            Log::error('product_insert_error', [$e]);
+
             return response()->json([
-                "message" => "Internal server error"
+                'message' => 'Internal server error',
             ], 404);
         }
     }
@@ -55,7 +54,6 @@ class ProductController extends Controller
     public function getProducts(Request $request)
     {
         try {
-
             // $products = product::join('categories', 'products.category_id', '=', 'categories.id')
             // ->select('products.*','categories.name as category_name')
             // ->get();
@@ -69,13 +67,13 @@ class ProductController extends Controller
             // Search by product name
             $search = $request->input('search');
             if ($search) {
-                $query->where('name', 'like', '%' . $search . '%');
+                $query->where('name', 'like', '%'.$search.'%');
             }
-
 
             $products = $query->paginate(10);
             if ($products) {
-                Log::info("user", [$products]);
+                Log::info('user', [$products]);
+
                 return response()->json([
                     'message' => ' success',
                     'result' => $products,
@@ -87,11 +85,13 @@ class ProductController extends Controller
             }
         } catch (Exception $e) {
             Log::error('error', [$e]);
+
             return response()->json([
-                "message" => "Internal server error",
+                'message' => 'Internal server error',
             ], 500);
         }
     }
+
     public function get_Products(Request $request)
     {
         $active = $request->query('status');
@@ -107,11 +107,12 @@ class ProductController extends Controller
             }
             $search = $request->input('search');
             if ($search) {
-                $query->where('name', 'like', '%' . $search . '%');
+                $query->where('name', 'like', '%'.$search.'%');
             }
             $products = $query->paginate(10);
             if ($products) {
-                Log::info("user", [$products]);
+                Log::info('user', [$products]);
+
                 return response()->json([
                     'message' => ' success',
                     'result' => $products,
@@ -123,13 +124,12 @@ class ProductController extends Controller
             }
         } catch (Exception $e) {
             Log::error('error', [$e]);
+
             return response()->json([
-                "message" => "Internal server error",
+                'message' => 'Internal server error',
             ], 500);
         }
     }
-
-
 
     // public function getproductformal(Request $request)
     // {
@@ -169,65 +169,67 @@ class ProductController extends Controller
     //         ], 500);
     //     }
     // }
-     public function getproductformal(Request $request){
-        $validation = Validator::make(
-            $request->all(),
-            [
-                "pageLimit" => "required|numeric",
-                "currentPage" => "required|numeric",
-            ]
-        );
+     public function getproductformal(Request $request)
+     {
+         $validation = Validator::make(
+             $request->all(),
+             [
+                 'pageLimit' => 'required|numeric',
+                 'currentPage' => 'required|numeric',
+             ]
+         );
 
-        if ($validation->fails()) {
-            return response()->json(
-                [
-                    "message" => "Validation error",
-                    "error" => $validation->errors()
-                ],
-                400
-            );
-        }
-        try{
-            $page_limit = $request->pageLimit;
-            $current_page = $request->currentPage;
-            $filter = $request->query("filter");
-            $search = $request->query("search");
-            $query = Product::join("categories","products.category_id","=","categories.id")
-            ->select("products.name as product_name","categories.name");
+         if ($validation->fails()) {
+             return response()->json(
+                 [
+                     'message' => 'Validation error',
+                     'error' => $validation->errors(),
+                 ],
+                 400
+             );
+         }
+         try {
+             $page_limit = $request->pageLimit;
+             $current_page = $request->currentPage;
+             $filter = $request->query('filter');
+             $search = $request->query('search');
+             $query = Product::join('categories', 'products.category_id', '=', 'categories.id')
+                 ->select('products.name as product_name', 'categories.name');
 
-            if($filter){
-                $flag =($filter === "active_only") ? 1 : 0;
-                $query = $query->where("products.is_active","=",$flag);
-            }
-            if($search){
-                $query -> whereraw(
-                    "products.name LIKE '%$request->search%'
+             if ($filter) {
+                 $flag = ($filter === 'active_only') ? 1 : 0;
+                 $query = $query->where('products.is_active', '=', $flag);
+             }
+             if ($search) {
+                 $query->whereraw(
+                     "products.name LIKE '%$request->search%'
                     OR categories.name LIKE '%$request->search%'
                     "
-                );
-            }
-            $products = $query->orderBy("products.name","ASC")
-                ->paginate(
-                    $perPage = $page_limit,
-                    $pageName = "page",
-                    $page = $current_page
-                );
-                $pagination_option = [
-                    "current_page" => $products->currentPage(),
-                    "total_page" => $products->total(),
-                ];
-                log::info("error",[$products->items()]);
-                return response()->json([
-                    "message" => "Success",
-                    "result" => $products->items(),
-                    "pagination_options" => $pagination_option
-                ], 200);
+                 );
+             }
+             $products = $query->orderBy('products.name', 'ASC')
+                 ->paginate(
+                     $perPage = $page_limit,
+                     $pageName = 'page',
+                     $page = $current_page
+                 );
+             $pagination_option = [
+                 'current_page' => $products->currentPage(),
+                 'total_page' => $products->total(),
+             ];
+             log::info('error', [$products->items()]);
 
-        }catch(Exception $e){
-            Log::error("error",[$e]);
-            return response()->json([
-                "message" => "Internal server error",
-            ],500);
-        }
+             return response()->json([
+                 'message' => 'Success',
+                 'result' => $products->items(),
+                 'pagination_options' => $pagination_option,
+             ], 200);
+         } catch (Exception $e) {
+             Log::error('error', [$e]);
+
+             return response()->json([
+                 'message' => 'Internal server error',
+             ], 500);
+         }
      }
 }

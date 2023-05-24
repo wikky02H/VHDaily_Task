@@ -16,13 +16,13 @@ class ApiEndPoint
      */
     public function handle(Request $request, Closure $next): Response
     {
-        Log::info('API Request',[
+        Log::info('API Request', [
             'url' => $request->fullUrl(),
             'method' => $request->method(),
             'headers' => $request->headers->all(),
             'content' => $request->getContent(),
         ]);
+
         return $next($request);
     }
 }
-

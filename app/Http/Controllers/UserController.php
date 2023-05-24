@@ -2,25 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
-use Exception;
 
 class UserController extends Controller
 {
-
     public function loginUser(Request $request)
     {
         $validation = Validator::make($request->all(), [
-            "email" => "required|email|min:10",
-            "password" => "required|string|min:6|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/",
+            'email' => 'required|email|min:10',
+            'password' => 'required|string|min:6|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
         ]);
 
         if ($validation->fails()) {
             return response()->json([
-                "message" => "validation error",
-                "result" => $validation->errors()
+                'message' => 'validation error',
+                'result' => $validation->errors(),
             ], 400);
         }
         try {
@@ -33,7 +32,8 @@ class UserController extends Controller
             // $user["password"] = $request->password;
 
             if ($user) {
-                Log::info("user", [$user]);
+                Log::info('user', [$user]);
+
                 return response()->json([
                     'message' => 'User Login successfully',
                     'result' => $user,
@@ -45,20 +45,20 @@ class UserController extends Controller
             }
         } catch (Exception $e) {
             Log::error('error', [$e]);
+
             return response()->json([
-                "message" => "Internal server error",
+                'message' => 'Internal server error',
             ], 500);
         }
     }
 
     public function getUser($email)
     {
-       ;
         $user = [
             'email' => 'VNkumar123@gmail.com',
             'password' => 'hashedpassword',
         ];
-             Log::info('error', [$user]);
+        Log::info('error', [$user]);
         try {
             if ($email === $user['email']) {
                 return response()->json([
@@ -72,8 +72,9 @@ class UserController extends Controller
             }
         } catch (Exception $e) {
             Log::error('error', [$e]);
+
             return response()->json([
-                "message" => "Internal server error",
+                'message' => 'Internal server error',
             ], 500);
         }
     }
@@ -81,14 +82,14 @@ class UserController extends Controller
     public function updateUser(Request $request)
     {
         $validation = Validator::make($request->all(), [
-            "email" => "required|email|min:10",
-            "password" => "required|string|min:6|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/",
+            'email' => 'required|email|min:10',
+            'password' => 'required|string|min:6|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
         ]);
 
         if ($validation->fails()) {
             return response()->json([
-                "message" => "validation error",
-                "Result" => $validation->errors()
+                'message' => 'validation error',
+                'Result' => $validation->errors(),
             ], 400);
         }
 
@@ -97,7 +98,7 @@ class UserController extends Controller
                 'email' => $request->email,
                 'password' => $request->password,
             ];
-            log::info("user", [$user]);
+            log::info('user', [$user]);
             if ($user) {
                 return response()->json([
                     'message' => 'Get user successfully',
@@ -110,8 +111,9 @@ class UserController extends Controller
             }
         } catch (Exception $e) {
             Log::error('error', [$e]);
+
             return response()->json([
-                "message" => "Internal server error",
+                'message' => 'Internal server error',
             ], 500);
         }
     }
@@ -119,13 +121,13 @@ class UserController extends Controller
     public function deleteUser(Request $request)
     {
         $validation = Validator::make($request->all(), [
-            "email" => "required|email|min:10",
+            'email' => 'required|email|min:10',
         ]);
 
         if ($validation->fails()) {
             return response()->json([
-                "message" => "validation error",
-                "Result" => $validation->errors()
+                'message' => 'validation error',
+                'Result' => $validation->errors(),
             ], 400);
         }
 
@@ -145,8 +147,9 @@ class UserController extends Controller
             }
         } catch (Exception $e) {
             Log::error('error', [$e]);
+
             return response()->json([
-                "message" => "Internal server error",
+                'message' => 'Internal server error',
             ], 500);
         }
     }

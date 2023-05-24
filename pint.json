@@ -1,0 +1,44 @@
+{
+    "preset": "psr12",
+    "rules": {
+      "array_syntax": {
+        "syntax": "short"
+      },
+      "blank_line_after_namespace": true,
+      "blank_line_after_opening_tag": true,
+      "braces": {
+        "allow_single_line_closure": true,
+        "allow_single_line_anonymous_class_with_empty_body": true
+      },
+      "fully_qualified_strict_types": true,
+      "function_declaration": {
+        "closure_function_spacing": "none"
+      },
+      "include": true,
+      "lowercase_cast": true,
+      "method_argument_space": {
+        "on_multiline": "ensure_fully_multiline"
+      },
+      "ordered_imports": {
+        "sort_algorithm": "alpha",
+        "imports_order": ["class", "const", "function"]
+      },
+
+      "no_multiline_whitespace_around_double_arrow": true,
+      "no_spaces_around_offset": true,
+      "no_trailing_comma_in_list_call": true,
+      "no_unused_imports": true,
+      "no_whitespace_before_comma_in_array": true,
+      "no_whitespace_in_blank_line": true,
+      "single_blank_line_before_namespace": true,
+      "single_trait_insert_per_statement": true,
+      "switch_case_semicolon_to_colon": true,
+      "switch_case_space": true,
+      "ternary_operator_spaces": true,
+      "trailing_comma_in_multiline": true,
+      "unary_operator_spaces": true,
+      "visibility_required": {
+        "elements": ["const", "method", "property"]
+      }
+    }
+  }

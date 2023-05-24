@@ -4,20 +4,19 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class () extends Migration {
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('categories', function(Blueprint $table) {
             $table->id();
-            $table->string("name");
+            $table->string('name');
             $table->boolean('is_active');
-            $table->integer('created_by',)->nullable();
-            $table->integer('modified_by',)->nullable();
-            $table->integer('deleted_by',)->nullable();
+            $table->integer('created_by')->nullable();
+            $table->integer('modified_by')->nullable();
+            $table->integer('deleted_by')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -31,6 +30,5 @@ return new class extends Migration
         Schema::dropIfExists('categories');
     }
 };
-
 
 //query in query.txt file
